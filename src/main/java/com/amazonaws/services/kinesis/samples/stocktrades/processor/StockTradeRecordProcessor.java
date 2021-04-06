@@ -88,15 +88,25 @@ public class StockTradeRecordProcessor implements ShardRecordProcessor {
     }
 
     private void reportStats() {
-        // TODO: Implement method
+        System.out.println("****** Shard " + kinesisShardId + " stats for last 1 minute ******\n" +
+                stockStats + "\n" +
+                "****************************************************************\n");
     }
 
     private void resetStats() {
-        // TODO: Implement method
+        stockStats = new StockStats();
     }
 
     private void processRecord(KinesisClientRecord record) {
-        // TODO: Implement method
+
+        byte[] arr = new byte[record.data().remaining()];
+        record.data().get(arr);
+        StockTrade trade = StockTrade.fromJsonAsBytes(arr);
+        if (trade == null) {
+            log.warn("Skipping record. Unable to parse record into StockTrade. Partition Key: " + record.partitionKey());
+            return;
+        }
+        stockStats.addStockTrade(trade);
     }
 
     @Override
@@ -107,7 +117,6 @@ public class StockTradeRecordProcessor implements ShardRecordProcessor {
     @Override
     public void shardEnded(ShardEndedInput shardEndedInput) {
         try {
-            // Important to checkpoint after reaching end of shard, so we can start processing data from child shards.
             log.info("Reached shard end checkpointing.");
             shardEndedInput.checkpointer().checkpoint();
         } catch (ShutdownException | InvalidStateException e) {
@@ -119,7 +128,6 @@ public class StockTradeRecordProcessor implements ShardRecordProcessor {
     public void shutdownRequested(ShutdownRequestedInput shutdownRequestedInput) {
         log.info("Scheduler is shutting down, checkpointing.");
         checkpoint(shutdownRequestedInput.checkpointer());
-
     }
 
     private void checkpoint(RecordProcessorCheckpointer checkpointer) {
@@ -137,5 +145,4 @@ public class StockTradeRecordProcessor implements ShardRecordProcessor {
             log.error("Cannot save checkpoint to the DynamoDB table used by the Amazon Kinesis Client Library.", e);
         }
     }
-
 }
