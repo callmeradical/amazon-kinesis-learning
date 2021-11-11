@@ -1,7 +1,0 @@
-/Users/lars/go/src/github.com/callmeradical/amazon-kinesis-learning/src/main/java/com/amazonaws/services/kinesis/samples/stocktrades/processor/StockTradeRecordProcessorFactory.java
-/Users/lars/go/src/github.com/callmeradical/amazon-kinesis-learning/src/main/java/com/amazonaws/services/kinesis/samples/stocktrades/writer/StockTradeGenerator.java
-/Users/lars/go/src/github.com/callmeradical/amazon-kinesis-learning/src/main/java/com/amazonaws/services/kinesis/samples/stocktrades/processor/StockStats.java
-/Users/lars/go/src/github.com/callmeradical/amazon-kinesis-learning/src/main/java/com/amazonaws/services/kinesis/samples/stocktrades/processor/StockTradesProcessor.java
-/Users/lars/go/src/github.com/callmeradical/amazon-kinesis-learning/src/main/java/com/amazonaws/services/kinesis/samples/stocktrades/writer/StockTradesWriter.java
-/Users/lars/go/src/github.com/callmeradical/amazon-kinesis-learning/src/main/java/com/amazonaws/services/kinesis/samples/stocktrades/processor/StockTradeRecordProcessor.java
-/Users/lars/go/src/github.com/callmeradical/amazon-kinesis-learning/src/main/java/com/amazonaws/services/kinesis/samples/stocktrades/model/StockTrade.java
